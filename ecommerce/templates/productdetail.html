@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>product details</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">detail</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start About Page  -->
+    <div class="about-box-main">
+        <div class="container">
+            <div class="row">
+				<div class="col-lg-6">
+                    <div class="banner-frame"> <img class="img-fluid" src="{{product.image.url}}" alt="" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="noo-sh-title-top"><span>{{product.name}}</span></h2>
+                    <p>Rs{{product.price}}</p>
+                    <p>currently {{product.stock}} items available</p>
+                    <h4>short description</h4>
+                    <p>{{product.description}}</p>
+                    {% if user.is_superuser == True %} <!--admin user-->
+					<a class="btn hvr-hover" href="#">add stock</a>
+                    {% else %}<!--normal user-->
+                    {% if product.stock > 0 %}
+                    <a class="btn hvr-hover" href="#">add to cart</a>
+                      {% else %}
+                        <h4>out of stock</h4>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+
+            </div>
+{% endblock %}
