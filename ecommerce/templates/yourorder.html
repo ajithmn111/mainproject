@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<h2 class="text-center mb-4">Your Orders</h2>
+
+{% for o in orders %}
+<div class="card p-4 mb-4 shadow">
+
+    <h4>Order_no: <strong>order_{{ o.id }}</strong></h4>
+    <p>Ordered on: <span class="text-danger">{{ o.ordered_date }}</span></p>
+    <p>Order Total: ₹{{ o.amount }}</p>
+    <p>Status: <span class="text-warning">{{ o.delivery_status }}</span></p>
+
+    <hr>
+
+    {% for item in o.items.all %}
+    <div class="row p-3">
+
+        <!-- Product Image -->
+        <div class="col-md-4">
+            <img src="{{ item.product.image.url }}" class="img-fluid" style="height:180px; width:auto;">
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-md-8">
+            <h5>Name: {{ item.product.name }}</h5>
+            <p>Price: ₹{{ item.product.price }}</p>
+            <p>Qty: {{ item.quantity }}</p>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+{% endfor %}
+
+{% endblock %}

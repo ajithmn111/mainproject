@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container w-75 p-5 mt-5 border border-2 fst-italic text-center">
+    <div class="products-box">
+        <div class="container">
+
+            <h2>you have searched for <span>{{query}}</span></h2>
+            {% if products %}
+            <div class="row special-list">
+
+
+             {% for i in products %}
+                <div class="col-lg-3 col-md-6 special-grid best-seller">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">Sale</p>
+                            </div>
+                            <img src="{{i.image.url}}" class="img-fluid" height="300px" width="100%" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="{% url 'shop:productdetail' i.id %}">details</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>{{i.name}}</h4>
+                            <h5>{{i.price}}</h5>
+                        </div>
+                    </div>
+                </div>
+
+
+{% endfor %}
+            </div>
+ {% else %}
+<h4 class="text-center">NO RESULTS FOUND</h4>
+ {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -25,3 +25,5 @@ class ProductForm(forms.ModelForm):
         model=Product
         fields=['name','description','price','image','stock','category']
 
+class AddStockForm(forms.Form):
+    stock = forms.IntegerField(label="Add Stock")
